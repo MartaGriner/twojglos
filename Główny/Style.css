@@ -3,7 +3,7 @@
 
 *,*::before, *::after {
 
- <center> <img src="Obrazki/Głos1.jpg"></center>
+ 
  
 box-sizing: border-box;
  font-family: 'Poppins',sans-serif;
@@ -17,7 +17,7 @@ body {
  background: #c5c5c5;
 }
 
-
+<center> <img src="Obrazki/Głos1.jpg"></center>
 .menu {
 width: 100%;
 position: fixed;
