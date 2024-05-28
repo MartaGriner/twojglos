@@ -18,8 +18,6 @@
     </body>
     </head>
 
-
-
     <center><h1 style="margin-top: 70px;font-size: xx-large;color: black;">Modulacja głosu:</h1></center>
     <center><div style="color:black">Ćwiczenie polegające na zmianie modulacji głosu, tj. jego barwy i ekspresji, poprzez eksperymentowanie z różnymi sposobami artykulacji i dynamiką dźwięku.</div></center>
 
@@ -34,50 +32,4 @@
             <button type="submit">Dodaj komentarz</button>
         </form>
         
-        <!-- Wyświetlanie komentarzy -->
-        <div id="comments">
-            <!-- Komentarze będą tu wstawiane przez JavaScript -->
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('comment-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var commentText = document.getElementById('comment-text').value;
-
-            // Wysłanie komentarza do serwera
-            fetch('save_comment.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'comment=' + encodeURIComponent(commentText)
-            })
-            .then(response => response.text())
-            .then(data => {
-                // Wyczyszczenie formularza
-                document.getElementById('comment-text').value = '';
-                // Załadowanie komentarzy
-                loadComments();
-            });
-        });
-
-        function loadComments() {
-            fetch('load_comments.php')
-            .then(response => response.json())
-            .then(data => {
-                var commentsDiv = document.getElementById('comments');
-                commentsDiv.innerHTML = '';
-                data.forEach(comment => {
-                    var commentElement = document.createElement('div');
-                    commentElement.textContent = comment;
-                    commentsDiv.appendChild(commentElement);
-                });
-            });
-        }
-
-        // Załadowanie komentarzy po załadowaniu strony
-        loadComments();
-    </script>
-</body>
-</html>
+       
