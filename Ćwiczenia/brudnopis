@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moja Strona</title>
+    <link rel="stylesheet" href="/twojglos/Główny/Style.css">
+</head>
+<body>
+    <nav class="menu">
+        <div class="dropdown">
+            <a href="/twojglos/index.html">Główna</a>
+            <a href="/twojglos/Główny/Ćwiczenie.html">Ćwiczenia</a>
+        </div>
+    </nav>
+
+    <center>
+        <h1 style="margin-top: 70px; font-size: xx-large; color: black;">Skalowanie dźwięku:</h1>
+        <div style="color: black;">Polega na wykonywaniu skali dźwięków w różnych rejestrach głosu, zwiększając stopniowo zakres tonacji.</div>
+    </center>
+
+    <h1 style="color: black;">Kliknij poniższy link, aby obejrzeć film na YouTube:</h1>
+
+    <div class="video-container" style="margin: 20px 0;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/NxNlQk5q6dM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <!-- Formularz dodawania komentarzy -->
+    <div id="comments-section">
+        <h2>Dodaj komentarz:</h2>
+        <form id="comment-form">
+            <textarea id="comment-text" required placeholder="Wpisz swój komentarz..."></textarea><br>
+            <button type="submit">Dodaj komentarz</button>
+        </form>
+        
+        <!-- Wyświetlanie komentarzy -->
+        <div id="comments">
+            <!-- Komentarze będą tu wstawiane przez JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('comment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var commentText = document.getElementById('comment-text').value;
+
+            // Wysłanie komentarza do serwera
+            fetch('save_comment.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'comment=' + encodeURIComponent(commentText)
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Wyczyszczenie formularza
+                document.getElementById('comment-text').value = '';
+                // Załadowanie komentarzy
+                loadComments();
+            });
+        });
+
+        function loadComments() {
+            fetch('load_comments.php')
+            .then(response => response.json())
+            .then(data => {
+                var commentsDiv = document.getElementById('comments');
+                commentsDiv.innerHTML = '';
+                data.forEach(comment => {
+                    var commentElement = document.createElement('div');
+                    commentElement.textContent = comment.text;
+                    commentsDiv.appendChild(commentElement);
+                });
+            });
+        }
+
+        // Załadowanie komentarzy po załadowaniu strony
+        loadComments();
+    </script>
+</body>
+</html>
