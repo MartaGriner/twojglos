@@ -1,12 +1,5 @@
-!DOCTYPE <html></html>
-<html>
-  <head>
-    <title>Ćwiczenie 1</title>
-  </head>
-  <body>
-    <h1>Skalowanie dźwięku:</h1>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="pl">
 <head>
     <body>
         <link rel="stylesheet" href="/twojglos/Główny/Style.css">
@@ -19,21 +12,12 @@
     </body>
     </head>
 
+    <center><h1 style="margin-top: 70px; font-size: xx-large; color: black;">Skalowanie dźwięku:</h1></center>
+    <center><div style="color: black;">Polega na wykonywaniu skali dźwięków w różnych rejestrach głosu, zwiększając stopniowo zakres tonacji.</div></center>
 
-
-    <center><h1 style="margin-top: 70px;font-size: xx-large;color: black;">Modulacja głosu:</h1></center>
-    <center><div style="color:black">Ćwiczenie polegające na zmianie modulacji głosu, tj. jego barwy i ekspresji, poprzez eksperymentowanie z różnymi sposobami artykulacji i dynamiką dźwięku.</div></center>
-
-   <center><h1 style="color:black">Kliknij poniższy link, aby obejrzeć film na YouTube:</h1></center>
- <div class="video-container" style="margin: 20px 0;">
-        <center><iframe width="760" height="500" src="https://www.youtube.com/embed/GokqiYnbuoc" frameborder="10" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-   
-   
-  <div id="comments-section">
-        <h2>Dodaj komentarz:</h2>
-        <form id="comment-form">
-            <textarea id="comment-text" required placeholder="Wpisz swój komentarz..."></textarea><br>
-            <button type="submit">Dodaj komentarz</button>
-        </form>
-        
-       
+   <center> <h1 style="color: black;">Kliknij poniższy link, aby obejrzeć film na YouTube:</h1></center>
+     <div class="video-container" style="margin: 20px 0;">
+        <center><iframe width="760" height="500" src="https://www.youtube.com/embed/NxNlQk5q6dM" frameborder="10" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+    </div>
+</body>
+</html>
