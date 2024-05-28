@@ -25,11 +25,5 @@
  <div class="video-container" style="margin: 20px 0;">
         <center><iframe width="760" height="500" src="https://www.youtube.com/embed/GokqiYnbuoc" frameborder="10" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
    
-  <div id="comments-section">
-        <h2>Dodaj komentarz:</h2>
-        <form id="comment-form">
-            <textarea id="comment-text" required placeholder="Wpisz swój komentarz..."></textarea><br>
-            <button type="submit">Dodaj komentarz</button>
-        </form>
-        
+ 
        
