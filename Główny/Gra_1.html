@@ -50,11 +50,11 @@
             Zgadnij Nutę
         </h1>
         <p style="color: black">Kliknij przycisk, aby wylosować nutę i zgadnąć, jaka to nuta.</p>
-        <button onclick="drawNote()">Nowa Gra</button>
+        <button onclick style="color: black"="drawNote()">Nowa Gra</button>
         <div id="note-link" class="hidden">
             <p style="color: black">Posłuchaj dźwięku: <a id="youtube-link" href="#" target="_blank">Kliknij tutaj</a></p>
             <input type="text" id="user-guess" placeholder style="color: black"="Twoja odpowiedź (np. C, D, E)">
-            <button onclick="checkGuess()">Sprawdź</button>
+            <button onclick style="color: black"="checkGuess()">Sprawdź</button>
         </div>
         <div id="result" class="result hidden"></div>
         <div id="score" class="result"></div>
@@ -90,10 +90,10 @@
             attempts++;
             if (userGuess === currentNote.note) {
                 wins++;
-                document.getElementById("result").textContent = "Gratulacje! Zgadłeś!";
+                document.getElementById("result").textContent style="color: black"= "Gratulacje! Zgadłeś!";
                 document.getElementById("next-note").classList.remove("hidden");
             } else {
-                document.getElementById("result").textContent = "Niestety, to nie ta nuta. Spróbuj ponownie lub przejdź do następnej nuty.";
+                document.getElementById("result").textContent style="color: black"= "Niestety, to nie ta nuta. Spróbuj ponownie lub przejdź do następnej nuty.";
                 document.getElementById("retry").classList.remove("hidden");
                 document.getElementById("next-note").classList.remove("hidden");
             }
@@ -108,7 +108,7 @@
         }
 
         function updateScore() {
-            document.getElementById("score").textContent = `Próby: ${attempts}, Wygrane: ${wins}`;
+            document.getElementById("score").textContent style="color: black"= `Próby: ${attempts}, Wygrane: ${wins}`;
         }
     </script>
 </body>
