@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/twojglos/Obrazki/Obraz_1__głos-główna-ikona_.ico" rel="shortcut icon" type="image/vnd.microsoft.ico" />
-    <title>Gra Muzyczna - Zgadnij Nutę</title>
+    <title>Gra Muzyczna - Zgadnij Dźwięk</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -78,9 +78,9 @@
     </nav>
 
     <div class="game-container">
-        <h1>Zgadnij Nutę</h1>
-        <p>Kliknij przycisk, aby wylosować nutę i zgadnąć, jaka to nuta.</p>
-        <button onclick="drawNote()">Losuj Nutę</button>
+        <h1>Zgadnij Dźwięk</h1>
+        <p>Kliknij przycisk, aby wylosować dźwięk i podać jego poprawne oznaczenie literowe.</p>
+        <button onclick="drawNote()">Losuj Dźwięk</button>
         <div id="note-link" class="hidden">
             <div id="youtube-container" class="hidden">
                 <iframe id="youtube-iframe" width="0" height="0" frameborder="0" allow="autoplay"></iframe>
@@ -90,7 +90,7 @@
         </div>
         <div id="result" class="result hidden"></div>
         <div id="score" class="result"></div>
-        <button id="next-note" class="hidden" onclick="drawNote()">Następna Nuta</button>
+        <button id="next-note" class="hidden" onclick="drawNote()">Następny Dźwięk</button>
         <button id="retry" class="hidden" onclick="retryGuess()">Spróbuj ponownie</button>
         <button id="replay-sound" class="hidden" onclick="replaySound()">Odsłuchaj ponownie</button>
     </div>
