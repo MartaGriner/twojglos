@@ -31,7 +31,7 @@
     <div class="game-container">
         <h1>Zgadnij Nutę</h1>
         <p>Kliknij przycisk, aby wylosować nutę i zgadnąć, jaka to nuta.</p>
-        <button onclick="drawNote()">Losuj Nutę</button>
+        <button onclick="drawNote()">Nowa Gra</button>
         <div id="note-link" class="hidden">
             <p>Posłuchaj dźwięku: <a id="youtube-link" href="#" target="_blank">Kliknij tutaj</a></p>
             <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)">
@@ -45,10 +45,10 @@
 
     <script>
         const notes = [
-            { note: "C", link: "https://www.youtube.com/watch?v=xxx" },
-            { note: "D", link: "https://www.youtube.com/watch?v=yyy" },
-            { note: "E", link: "https://www.youtube.com/watch?v=zzz" }
-            // Dodaj więcej nut i linków do YouTube tutaj
+            { note: "C", link: "" },
+            { note: "D", link: "" },
+            { note: "E", link: "" }
+            
         ];
 
         let currentNote = null;
