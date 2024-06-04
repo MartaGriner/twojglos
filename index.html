@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+@@ -1,43 +1,44 @@
 <html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTG-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Twój Głos</title>
     <link
       href="/twojglos/Obrazki/Obraz_1__głos-główna-ikona_.ico"
@@ -18,87 +19,57 @@
         <a href="/twojglos/index.html">Główna</a>
         <a href="/twojglos/Główny/Ćwiczenie.html">Ćwiczenia</a>
         <a href="/twojglos/Główny/Gra_1.html">Gra</a>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-            color: #333;
-        }
-        .game-container {
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 600px;
-        }
-        .result {
-            margin: 20px 0;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="game-container">
-        <h1>Zgadnij Nutę</h1>
-        <p>Kliknij przycisk, aby wylosować nutę i zgadnąć, jaka to nuta.</p>
-        <button onclick="drawNote()">Nowa Gra</button>
-        <div id="note-link" class="hidden">
-            <p>Posłuchaj dźwięku: <a id="youtube-link" href="#" target="_blank">Kliknij tutaj</a></p>
-            <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)">
-            <button onclick="checkGuess()">Sprawdź</button>
-        </div>
-        <div id="result" class="result hidden"></div>
-        <div id="score" class="result"></div>
-        <button id="next-note" class="hidden" onclick="drawNote()">Następna Nuta</button>
-        <button id="retry" class="hidden" onclick="retryGuess()">Spróbuj ponownie</button>
-    </div>
-    <script>
-        const notes = [
-            { note: "C", link: "" },
-            { note: "D", link: "" },
-            { note: "E", link: "" }
-            
-        ];
-        let currentNote = null;
-        let attempts = 0;
-        let wins = 0;
-        function drawNote() {
-            const randomIndex = Math.floor(Math.random() * notes.length);
-            currentNote = notes[randomIndex];
-            document.getElementById("youtube-link").href = currentNote.link;
-            document.getElementById("note-link").classList.remove("hidden");
-            document.getElementById("result").classList.add("hidden");
-            document.getElementById("next-note").classList.add("hidden");
-            document.getElementById("retry").classList.add("hidden");
-            document.getElementById("user-guess").value = '';
-        }
-        function checkGuess() {
-            const userGuess = document.getElementById("user-guess").value.trim().toUpperCase();
-            attempts++;
-            if (userGuess === currentNote.note) {
-                wins++;
-                document.getElementById("result").textContent = "Gratulacje! Zgadłeś!";
-                document.getElementById("next-note").classList.remove("hidden");
-            } else {
-                document.getElementById("result").textContent = "Niestety, to nie ta nuta. Spróbuj ponownie lub przejdź do następnej nuty.";
-                document.getElementById("retry").classList.remove("hidden");
-                document.getElementById("next-note").classList.remove("hidden");
-            }
-            document.getElementById("result").classList.remove("hidden");
-            updateScore();
-        }
-        function retryGuess() {
-            document.getElementById("result").classList.add("hidden");
-            document.getElementById("retry").classList.add("hidden");
-            document.getElementById("user-guess").value = '';
-        }
-        function updateScore() {
-            document.getElementById("score").textContent = `Próby: ${attempts}, Wygrane: ${wins}`;
-        }
-    </script>
-</body>
+        
+      </div>
+    </nav>
+    <center>
+      <h1 style="margin-top: 70px; font-size: xx-large; color: black">
+        EDUKACYJNA STRONA DOTYCZĄCA GŁOSU, ŚLEDZENIA I ANALIZY JEGO STANU ORAZ
+        ĆWICZENIA GŁOSOWE
+      </h1>
+    </center>
+    <center>
+      <div style="color: black">
+        Głos jest nieodłącznym elementem codziennego życia, potrzebnym do
+        podstawowej komunikacji i wszystkiego, co się z tym wiąże. Głos,
+        podobnie jak mięśnie, warto ćwiczyć i dbać o jego kondycję, by mógł
+        służyć przez długie, długie lata. Nasza strona pozwoli Ci na wykonywanie
+        zróżnicowanych ćwiczeń związanych z głosem, poczynając od bardziej
+        technicznych jego aspektów, na przykład poszerzenia skali, po ćwiczenia
+        dużo bardziej uogólnione, jak na przykład wyćwiczenie odpowiedniej
+        techniki oddechu. 
+      </div>
+
+       <div style="color: black">
+        Strona “Twój Głos” jest projektem hobbistycznym,
+        dlatego nie gwarantujemy wyników możliwych do uzyskania na zajęciach z
+@@ -46,7 +47,7 @@ <h1 style="margin-top: 70px; font-size: xx-large; color: black">
+
+    </center>
+
+     <center> <img src="Obrazki/Głos1.jpg"></center>
+     <p><center> <img src="Obrazki/Głos1.jpg"></center> </p>
+
+  </body>
 </html>
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+    this.page.url = "https://martagriner.github.io/twojglos/"; // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = "twojglos"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  (function () {
+    // DON'T EDIT BELOW THIS LINE
+    var d = document,
+      s = d.createElement("script");
+    s.src = "https://twojglos.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
