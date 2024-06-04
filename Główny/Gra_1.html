@@ -20,21 +20,21 @@
         
       </div>
     </nav>
-    <style>
+
+        <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #00;
-            color: #black;
+            background-color: #f0f0f0;
+            color: black;
         }
         .game-container {
             margin: 50px auto;
             padding: 20px;
-            background-color: #00;
+            background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 80%;
             max-width: 600px;
-
         }
         .result {
             margin: 20px 0;
@@ -42,14 +42,39 @@
         .hidden {
             display: none;
         }
+        a {
+            color: black;
+            text-decoration: underline;
+        }
+        button {
+            background-color: #008CBA; /* Niebieski kolor przycisku */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #006994; /* Ciemniejszy niebieski po najechaniu */
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
-
     <div class="game-container">
-         <h1 style="margin-top: 70px; font-size: xx-large; color: black">Zgadnij Nutę</h1>
+        <h1>Zgadnij Nutę</h1>
         <p>Kliknij przycisk, aby wylosować nutę i zgadnąć, jaka to nuta.</p>
-        <button onclick ="drawNote()">Losuj Nutę</button>
+        <button onclick="drawNote()">Losuj Nutę</button>
         <div id="note-link" class="hidden">
             <p>Posłuchaj dźwięku: <a id="youtube-link" href="#" target="_blank">Kliknij tutaj</a></p>
             <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)">
@@ -63,10 +88,10 @@
 
     <script>
         const notes = [
-            { note: "C", link: },
-            { note: "D", link: },
-            { note: "E", link: }
-          
+            { note: "C", link: "https://www.youtube.com/watch?v=xxx" },
+            { note: "D", link: "https://www.youtube.com/watch?v=yyy" },
+            { note: "E", link: "https://www.youtube.com/watch?v=zzz" }
+            // Dodaj więcej nut i linków do YouTube tutaj
         ];
 
         let currentNote = null;
