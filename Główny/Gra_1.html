@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link
-      href="/twojglos/Obrazki/Obraz_1__głos-główna-ikona_.ico"
-      rel="shortcut icon"
-      type="image/vnd.microsoft.ico"
-    />
+    <link href="/twojglos/Obrazki/Obraz_1__głos-główna-ikona_.ico" rel="shortcut icon" type="image/vnd.microsoft.ico" />
     <title>Gra Muzyczna - Zgadnij Nutę</title>
     <style>
         body {
@@ -35,7 +31,7 @@
             text-decoration: underline;
         }
         button {
-            background-color: #008CBA; /* Niebieski kolor przycisku */
+            background-color: #008CBA;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -48,7 +44,7 @@
             border-radius: 4px;
         }
         button:hover {
-            background-color: #006994; /* Ciemniejszy niebieski po najechaniu */
+            background-color: #006994;
         }
         input {
             padding: 10px;
@@ -86,7 +82,9 @@
         <p>Kliknij przycisk, aby wylosować nutę i zgadnąć, jaka to nuta.</p>
         <button onclick="drawNote()">Losuj Nutę</button>
         <div id="note-link" class="hidden">
-            <p>Posłuchaj dźwięku: <a id="youtube-link" href="#" target="_blank">Kliknij tutaj</a></p>
+            <div id="youtube-container" class="hidden">
+                <iframe id="youtube-iframe" width="0" height="0" frameborder="0" allow="autoplay"></iframe>
+            </div>
             <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)">
             <button onclick="checkGuess()">Sprawdź</button>
         </div>
@@ -98,14 +96,13 @@
 
     <script>
         const notes = [
-            { note: "C", link: "https://www.youtube.com/watch?v=FtqgqYRDTDg" },
-            { note: "D", link: "https://www.youtube.com/watch?v=3o_GX-e92mY" },
-            { note: "E", link: "https://www.youtube.com/watch?v=h0qBW6V5v3c" },
-            { note: "A", link: "https://www.youtube.com/watch?v=h0qBW6V5v3c" },
-            { note: "H", link: "https://www.youtube.com/watch?v=AW2FFA0OAGw" },
-            { note: "G", link: "https://www.youtube.com/watch?v=GSynCGIGUDY" },
-        { note: "F", link: "https://www.youtube.com/watch?v=npF9rPdU_VA" }
-            
+            { note: "C", link: "https://www.youtube.com/embed/FtqgqYRDTDg?autoplay=1" },
+            { note: "D", link: "https://www.youtube.com/embed/3o_GX-e92mY?autoplay=1" },
+            { note: "E", link: "https://www.youtube.com/embed/h0qBW6V5v3c?autoplay=1" },
+            { note: "A", link: "https://www.youtube.com/embed/h0qBW6V5v3c?autoplay=1" },
+            { note: "H", link: "https://www.youtube.com/embed/AW2FFA0OAGw?autoplay=1" },
+            { note: "G", link: "https://www.youtube.com/embed/GSynCGIGUDY?autoplay=1" },
+            { note: "F", link: "https://www.youtube.com/embed/npF9rPdU_VA?autoplay=1" }
             // Dodaj więcej nut i linków do YouTube tutaj
         ];
 
@@ -116,8 +113,9 @@
         function drawNote() {
             const randomIndex = Math.floor(Math.random() * notes.length);
             currentNote = notes[randomIndex];
-            document.getElementById("youtube-link").href = currentNote.link;
+            document.getElementById("youtube-iframe").src = currentNote.link;
             document.getElementById("note-link").classList.remove("hidden");
+            document.getElementById("youtube-container").classList.remove("hidden");
             document.getElementById("result").classList.add("hidden");
             document.getElementById("next-note").classList.add("hidden");
             document.getElementById("retry").classList.add("hidden");
