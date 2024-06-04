@@ -1,12 +1,4 @@
-*::before,
-*::after {
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  color: white;
-}
-  body {
+body {
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f0f0f0;
