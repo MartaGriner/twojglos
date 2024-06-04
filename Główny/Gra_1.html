@@ -17,14 +17,14 @@
         <a href="/twojglos/index.html">Główna</a>
         <a href="/twojglos/Główny/Ćwiczenie.html">Ćwiczenia</a>
         <a href="/twojglos/Główny/Gra_1.html">Gra</a>
- </div>
+      </div>
     </nav>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #c5c5c5;
-            color: #00;
+            color: black;
         }
         .game-container {
             margin: 50px auto;
@@ -33,7 +33,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 80%;
             max-width: 600px;
-            color: #00
+            color: black;
         }
         .result {
             margin: 20px 0;
@@ -46,20 +46,20 @@
 
 <body>
     <div class="game-container">
-        <h1 style="margin-top: 70px; font-size: xx-large;color: black">
+        <h1 style="margin-top: 70px; font-size: xx-large; color: black;">
             Zgadnij Nutę
         </h1>
-        <p style="color: black">Kliknij przycisk, aby wylosować nutę i zgadnąć, jaka to nuta.</p>
-        <button onclick style="color: black"="drawNote()">Nowa Gra</button>
+        <p style="color: black;">Kliknij przycisk, aby wylosować nutę i zgadnąć, jaka to nuta.</p>
+        <button onclick="drawNote()" style="color: black;">Nowa Gra</button>
         <div id="note-link" class="hidden">
-            <p style="color: black">Posłuchaj dźwięku: <a id="youtube-link" href="#" target="_blank">Kliknij tutaj</a></p>
-            <input type="text" id="user-guess" placeholder style="color: black"="Twoja odpowiedź (np. C, D, E)">
-            <button onclick style="color: black"="checkGuess()">Sprawdź</button>
+            <p style="color: black;">Posłuchaj dźwięku: <a id="youtube-link" href="#" target="_blank">Kliknij tutaj</a></p>
+            <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)" style="color: black;">
+            <button onclick="checkGuess()" style="color: black;">Sprawdź</button>
         </div>
-        <div id="result" class="result hidden"></div>
-        <div id="score" class="result"></div>
-        <button id="next-note" class="hidden" onclick style="color: black" ="drawNote()">Następna Nuta</button>
-        <button id="retry" class="hidden" onclick style="color: black"="retryGuess()">Spróbuj ponownie</button>
+        <div id="result" class="result hidden" style="color: black;"></div>
+        <div id="score" class="result" style="color: black;"></div>
+        <button id="next-note" class="hidden" onclick="drawNote()" style="color: black;">Następna Nuta</button>
+        <button id="retry" class="hidden" onclick="retryGuess()" style="color: black;">Spróbuj ponownie</button>
     </div>
 
     <script>
@@ -67,7 +67,6 @@
             { note: "C", link: "" },
             { note: "D", link: "" },
             { note: "E", link: "" }
-            
         ];
 
         let currentNote = null;
@@ -90,10 +89,10 @@
             attempts++;
             if (userGuess === currentNote.note) {
                 wins++;
-                document.getElementById("result").textContent style="color: black"= "Gratulacje! Zgadłeś!";
+                document.getElementById("result").textContent = "Gratulacje! Zgadłeś!";
                 document.getElementById("next-note").classList.remove("hidden");
             } else {
-                document.getElementById("result").textContent style="color: black"= "Niestety, to nie ta nuta. Spróbuj ponownie lub przejdź do następnej nuty.";
+                document.getElementById("result").textContent = "Niestety, to nie ta nuta. Spróbuj ponownie lub przejdź do następnej nuty.";
                 document.getElementById("retry").classList.remove("hidden");
                 document.getElementById("next-note").classList.remove("hidden");
             }
@@ -108,8 +107,9 @@
         }
 
         function updateScore() {
-            document.getElementById("score").textContent style="color: black"= `Próby: ${attempts}, Wygrane: ${wins}`;
+            document.getElementById("score").textContent = `Próby: ${attempts}, Wygrane: ${wins}`;
         }
     </script>
 </body>
 </html>
+
