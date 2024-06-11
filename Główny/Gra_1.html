@@ -87,12 +87,10 @@
             </div>
             <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)" onkeypress="handleKeyPress(event)">
             <button onclick="checkGuess()">Sprawdź</button>
-    
         </div>
         <div id="result" class="result hidden"></div>
         <div id="score" class="result"></div>
         <button id="next-note" class="hidden" onclick="drawNote()">Następny Dźwięk</button>
-        <button id="retry" class="hidden" onclick="retryGuess()">Spróbuj ponownie</button>
         <button id="replay-sound" class="hidden" onclick="replaySound()">Odsłuchaj ponownie</button>
     </div>
     <script>
@@ -117,7 +115,6 @@
             document.getElementById("youtube-container").classList.remove("hidden");
             document.getElementById("result").classList.add("hidden");
             document.getElementById("next-note").classList.add("hidden");
-            document.getElementById("retry").classList.add("hidden");
             document.getElementById("replay-sound").classList.remove("hidden");
             document.getElementById("user-guess").value = '';
         }
@@ -135,10 +132,11 @@
                 document.getElementById("next-note").classList.remove("hidden");
             } else {
                 document.getElementById("result").textContent = "Niestety, to nie ta nuta. Spróbuj ponownie lub przejdź do następnej nuty.";
-                document.getElementById("retry").classList.remove("hidden");
+                document.getElementById("user-guess").value = '';
             }
         
             updateScore();
+            document.getElementById("result").classList.remove("hidden");
         }
 
         function handleKeyPress(event) {
@@ -148,14 +146,10 @@
             }
         }
 
-        function retryGuess() {
-            document.getElementById("result").classList.add("hidden");
-            document.getElementById("retry").classList.add("hidden");
-            document.getElementById("user-guess").value = '';
-        }
         function replaySound() {
             document.getElementById("youtube-iframe").src = currentNote.link;
         }
+
         function updateScore() {
             document.getElementById("score").textContent = `Próby: ${attempts}, Wygrane: ${wins}`;
         }
@@ -175,17 +169,6 @@
         s.setAttribute("data-timestamp", +new Date());
         (d.head || d.body).appendChild(s);
       })();
-        // **Dodana funkcjonalność zatwierdzania klawiszem Enter**
-        document.getElementById("user-guess").addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                // Sprawdzenie, czy pole tekstowe nie jest puste
-                if (document.getElementById("user-guess").value.trim() !== "") {
-                    checkGuess();
-                } else {
-                    alert("Proszę wpisać odpowiedź przed zatwierdzeniem.");
-                }
-            }
-        });
     </script>
     <noscript
       >Please enable JavaScript to view the
@@ -195,25 +178,3 @@
     >
 </body>
 </html>
-
-<div id="disqus_thread"></div>
-<script>
-  var disqus_config = function () {
-    this.page.url = "https://martagriner.github.io/twojglos/G%C5%82%C3%B3wny/Gra_1.html"; // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = "Główny/Gra_1.html"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-  (function () {
-    // DON'T EDIT BELOW THIS LINE
-    var d = document,
-      s = d.createElement("script");
-    s.src = "https://twojglos.disqus.com/embed.js";
-    s.setAttribute("data-timestamp", +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-</script>
-<noscript
-  >Please enable JavaScript to view the
-  <a href="https://disqus.com/?ref_noscript"
-    >comments powered by Disqus.</a
-  ></noscript
->
