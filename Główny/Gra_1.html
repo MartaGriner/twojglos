@@ -1,97 +1,155 @@
-            <div id="youtube-container" class="hidden">
-                <iframe id="youtube-iframe" width="0" height="0" frameborder="0" allow="autoplay"></iframe>
-            </div>
-            <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)" onkeypress="handleKeyPress(event)">
-            <button onclick="checkGuess()">Sprawdź</button>
-            <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)">
-            <button id="check-button" onclick="checkGuess()">Sprawdź</button>
-        </div>
-        <div id="result" class="result hidden"></div>
-        <div id="score" class="result"></div>
-@@ -126,6 +126,10 @@ <h1>Zgadnij Dźwięk</h1>
-
-        function checkGuess() {
-            const userGuess = document.getElementById("user-guess").value.trim().toUpperCase();
-            if (userGuess === "") {
-                alert("Proszę wpisać odpowiedź przed zatwierdzeniem.");
-                return;
-            }
-            attempts++;
-            if (userGuess === currentNote.note) {
-                wins++;
-@@ -140,13 +144,6 @@ <h1>Zgadnij Dźwięk</h1>
-            updateScore();
+<!DOCTYPE html >
+< html  lang =" pl " >
+< głowa >
+    < meta  zestaw znaków =" UTF-8 " >
+    < nazwa meta  =" rzutnia " treść =" szerokość = szerokość urządzenia, skala początkowa = 1,0 " >
+    < link  href =" /twojglos/Obrazki/Obraz_1__głos-główna-ikona_.ico " rel =" ikona skrótu " type =" image/vnd.microsoft.ico " />
+    < tytuł > Gra Muzyczna - Zgadnij Dźwięk </ title >
+    <styl>​​
+        ciało {
+            rodzina czcionek: Arial, bezszeryfowa;
+            wyrównanie tekstu: do środka;
+            kolor tła: #f0f0f0;
+            czarny kolor;
+        }
+        .game-container {
+            margines: 50px automatyczny;
+            dopełnienie: 20px;
+            kolor tła: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            szerokość: 80%;
+            maksymalna szerokość: 600px;
+        }
+        .wynik {
+            margines: 20px 0;
+        }
+        .ukryty {
+            Nie wyświetla się;
+        }
+        A {
+            czarny kolor;
+            dekoracja tekstu: podkreślenie;
+        }
+        przycisk {
+            kolor tła: #008CBA;
+            kolor biały;
+            granica: brak;
+            dopełnienie: 10px 20px;
+            wyrównanie tekstu: do środka;
+            dekoracja tekstu: brak;
+            wyświetlacz: blok inline;
+            rozmiar czcionki: 16 pikseli;
+            margines: 4px 2px;
+            kursor: wskaźnik;
+            promień obramowania: 4px;
+        }
+        przycisk:najedź {
+            kolor tła: #006994;
+        }
+        wejście {
+            dopełnienie: 10px;
+            rozmiar czcionki: 16 pikseli;
+            obramowanie: 1px stała #ccc;
+            promień obramowania: 4px;
+        }
+        .menu {
+            kolor tła: #333;
+            przepełnienie: ukryte;
+        }
+        .menu a {
+            pływak: w lewo;
+            Blok wyświetlacza;
+            kolor biały;
+            wyrównanie tekstu: do środka;
+            dopełnienie: 14px 16px;
+            dekoracja tekstu: brak;
+        }
+        .menu a: najedź {
+            kolor tła: #ddd;
+            czarny kolor;
+        }
+    </styl>​​
+</ głowa >
+< ciało >
+    < klasa nawigacji  =" menu " >
+        < a  href =" /twojglos/index.html " > Główna </ a >
+        < a  href =" /twojglos/Główny/Ćwiczenie.html " > Ćwiczenia </ a >
+        <a href=" # " > Gra < / a >​ ​​​​
+    </ nawigacja >
+    < div  class =" kontener gry " >
+        < h1 > Zgadnij Dźwięk </ h1 >
+        < p > Kliknij przycisk, aby wylosować dźwięk z charakterystycznej skali i zgadnąć, który to z nich. </p>​​
+        < przycisk  onclick =" remisNote() " > Nowa gra </ przycisk >
+        < div  id =" link do notatki " class =" ukryty " >
+            < id div  =" youtube-container " class =" ukryty " >
+                < iframe  id =" youtube-iframe " szerokość =" 0 " wysokość =" 0 " ramka =" 0 " zezwolenie =" autoodtwarzanie " > </ iframe >
+            </ dział >
+            < typ wejścia  =" tekst " id =" odgadnięcie użytkownika " placeholder =" Twoja odpowiedź (np. C, D, E) " >
+            < typ wejścia  =" tekst " id =" user-guess " placeholder =" Twoja odpowiedź (np. C, D, E) " onkeypress =" handleKeyPress(event) " > 
+            < przycisk  onclick =" checkGuess() " > przycisk Sprawdź </ >
+        </ dział >
+        < div  id =" wynik " class =" wynik ukryty " > </ div >
+@@ -140,6 +140,13 @@ <h1>Zgadnij Dźwięk</h1>
+            aktualizacjaScore ( ) ;
         }
 
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                checkGuess();
+        funkcja  handleKeyPress ( zdarzenie )  {
+            if  ( zdarzenie . klucz  ===  "Enter" )  {
+                wydarzenie . zapobiegaj domyślnemu ( ) ;
+                sprawdźZgadnij ( ) ;
             }
         }
 
-        function retryGuess() {
-            document.getElementById("result").classList.add("hidden");
-            document.getElementById("retry").classList.add("hidden");
-@@ -160,28 +157,40 @@ <h1>Zgadnij Dźwięk</h1>
-        function updateScore() {
-            document.getElementById("score").textContent = `Próby: ${attempts}, Wygrane: ${wins}`;
+        funkcja  spróbuj ponownieZgadnij ( )  {
+            dokument . getElementById ( „wynik” ) . Lista klas . dodaj ( "ukryty" ) ;
+            dokument . getElementById ( „ponów próbę” ) . Lista klas . dodaj ( "ukryty" ) ;
+@@ -154,27 +161,27 @@ <h1>Zgadnij Dźwięk</h1>
+            dokument . getElementById ( „wynik” ) . textContent  =  `Próby: ${ prób } , Wygrane: ${ wygranych } ` ;
         }
-    </script>
+    </ skrypt >
 
-    <div id="disqus_thread"></div>
-    <script>
-      var disqus_config = function () {
-        this.page.url = "https://martagriner.github.io/twojglos/G%C5%82%C3%B3wny/Gra_1.html"; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "Główny/Gra_1.html"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      };
-      (function () {
-        // DON'T EDIT BELOW THIS LINE
-        var d = document,
-          s = d.createElement("script");
-        s.src = "https://twojglos.disqus.com/embed.js";
-        s.setAttribute("data-timestamp", +new Date());
-        (d.head || d.body).appendChild(s);
-      })();
-        // **Dodana funkcjonalność zatwierdzania klawiszem Enter**
-        document.getElementById("user-guess").addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                // Sprawdzenie, czy pole tekstowe nie jest puste
-                if (document.getElementById("user-guess").value.trim() !== "") {
-                    checkGuess();
-                } else {
-                    alert("Proszę wpisać odpowiedź przed zatwierdzeniem.");
-                }
-            }
-        });
-    </script>
-    <noscript
-      >Please enable JavaScript to view the
-      <a href="https://disqus.com/?ref_noscript"
-        >comments powered by Disqus.</a
-      ></noscript
+    < div  id =" disqus_thread " > </ div >
+    <skrypt>​​
+      var  disqus_config  =  funkcja  ( )  {
+        Ten . strona . url  =  "https://martagriner.github.io/twojglos/G%C5%82%C3%B3wny/Gra_1.html" ;  // Zamień PAGE_URL na kanoniczną zmienną adresu URL swojej strony
+        Ten . strona . identyfikator  =  "Główny/Gra_1.html" ;  // Zastąp PAGE_IDENTIFIER unikalną zmienną identyfikatora swojej strony
+      } ;
+      ( funkcja  ( )  {
+        // NIE EDYTUJ PONIŻEJ TEJ LINII
+        var  d  =  dokument ,
+          s  =  re . utwórzElement ( "skrypt" ) ;
+        S . src  =  "https://twojglos.disqus.com/embed.js" ;
+        S . setAttribute ( „data-znacznik czasu” ,  + nowa  data ( ) ) ;
+        ( d . głowa  ||  d . ciało ) . appendChild ( s ) ;
+      } ) ( ) ;
+    </ skrypt >
+    < noscript
+      > Włącz JavaScript, aby zobaczyć
+      < a  href =" https://disqus.com/?ref_noscript "
+        > komentarze obsługiwane przez Disqus. </ a
+      > </ noscript
     >
-</body>
-</html>
+</ treść >
+</html>​​
 
-<div id="disqus_thread"></div>
-<script>
-  var disqus_config = function () {
-    this.page.url = "https://martagriner.github.io/twojglos/G%C5%82%C3%B3wny/Gra_1.html"; // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = "Główny/Gra_1.html"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-  (function () {
-    // DON'T EDIT BELOW THIS LINE
-    var d = document,
-      s = d.createElement("script");
-    s.src = "https://twojglos.disqus.com/embed.js";
-    s.setAttribute("data-timestamp", +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-</script>
-<noscript
-  >Please enable JavaScript to view the
-  <a href="https://disqus.com/?ref_noscript"
-    >comments powered by Disqus.</a
-  ></noscript
+< div  id =" disqus_thread " > </ div >
+<skrypt>​​
+  var  disqus_config  =  funkcja  ( )  {
+    Ten . strona . url  =  "https://martagriner.github.io/twojglos/G%C5%82%C3%B3wny/Gra_1.html" ;  // Zamień PAGE_URL na kanoniczną zmienną adresu URL swojej strony
+    Ten . strona . identyfikator  =  "Główny/Gra_1.html" ;  // Zastąp PAGE_IDENTIFIER unikalną zmienną identyfikatora swojej strony
+  } ;
+  ( funkcja  ( )  {
+    // NIE EDYTUJ PONIŻEJ TEJ LINII
+    var  d  =  dokument ,
+      s  =  re . utwórzElement ( "skrypt" ) ;
+    S . src  =  "https://twojglos.disqus.com/embed.js" ;
+    S . setAttribute ( „data-znacznik czasu” ,  + nowa  data ( ) ) ;
+    ( d . głowa  ||  d . ciało ) . appendChild ( s ) ;
+  } ) ( ) ;
+</ skrypt >
+< noscript
+  > Włącz JavaScript, aby zobaczyć
+  < a  href =" https://disqus.com/?ref_noscript "
+    > komentarze obsługiwane przez Disqus. </ a
+  > </ noscript
 >
