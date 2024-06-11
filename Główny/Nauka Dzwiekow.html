@@ -1,22 +1,267 @@
-
-!DOCTYPE <html></html>
+<!DOCTYPE html>
 <html lang="pl">
-    <meta charset="UTG-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twój.Głos</title>
-<link href="Obrazki/Obraz_1__głos-główna-ikona_.ico" rel="shortcut icon" type="image/vnd.microsoft.ico">
-<<head>
-    <body>
-        <link rel="stylesheet" href="C:\Users\agabe\Desktop\Strona\Główny\Styl.css">
-        <nav class="menu">
-            <div class="dropdown">
-                <a href="C:\Users\agabe\Desktop\Strona\Główny\index.html">Główna</a>
-                <a href="C:\Users\agabe\Desktop\Strona\Główny\cwiczenia.html">Ćwiczenia</a>
-                <a href="C:\Users\agabe\Desktop\Strona\Główny\Profil.html">Profil</a>
+    <link href="/twojglos/Obrazki/Obraz_1__głos-główna-ikona_.ico" rel="shortcut icon" type="image/vnd.microsoft.ico" />
+    <title>Gra Muzyczna - Zgadnij Dźwięk</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            color: black;
+        }
+        .game-container {
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        .result {
+            margin: 20px 0;
+        }
+        .hidden {
+            display: none;
+        }
+        a {
+            color: black;
+            text-decoration: underline;
+        }
+        button {
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #006994;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .menu {
+            background-color: #333;
+            overflow: hidden;
+        }
+        .menu a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu">
+        <a href="/twojglos/index.html">Główna</a>
+        <a href="/twojglos/Główny/Ćwiczenie.html">Ćwiczenia</a>
+        <a href="#">Gra</a>
+    </nav>
+    <div class="game-container">
+        <h1>Zgadnij Dźwięk</h1>
+        <p>Kliknij przycisk, aby wylosować dźwięk z podstawowej skali i zgadnąć, który to z nich.</p>
+        <button onclick="drawNote()">Nowa gra</button>
+        <div id="note-link" class="hidden">
+            <div id="youtube-container" class="hidden">
+                <iframe id="youtube-iframe" width="0" height="0" frameborder="0" allow="autoplay"></iframe>
             </div>
-        </nav>
-    </body>
-    </head>
-    
-    <center> <img src="C:\Users\agabe\Desktop\Strona\Obrazki\wallpaper-3038399_1280.png"></center>
+            <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)" onkeypress="handleKeyPress(event)">
+            <button onclick="checkGuess()">Sprawdź</button>
+            <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)">
+            <button id="check-button" onclick="checkGuess()">Sprawdź</button>
+        </div>
+        <div id="result" class="result hidden"></div>
+        <div id="score" class="result"></div>
+        <button id="next-note" class="hidden" onclick="drawNote()">Następny Dźwięk</button>
+        <button id="retry" class="hidden" onclick="retryGuess()">Spróbuj ponownie</button>
+        <button id="replay-sound" class="hidden" onclick="replaySound()">Odsłuchaj ponownie</button>
+    </div>
+    <script>
+        const notes = [
+            { note: "C", link: "https://www.youtube.com/embed/FtqgqYRDTDg?autoplay=1" },
+            { note: "D", link: "https://www.youtube.com/embed/3o_GX-e92mY?autoplay=1" },
+            { note: "E", link: "https://www.youtube.com/embed/h0qBW6V5v3c?autoplay=1" },
+            { note: "A", link: "https://www.youtube.com/embed/h0qBW6V5v3c?autoplay=1" },
+            { note: "H", link: "https://www.youtube.com/embed/AW2FFA0OAGw?autoplay=1" },
+            { note: "G", link: "https://www.youtube.com/embed/GSynCGIGUDY?autoplay=1" },
+            { note: "F", link: "https://www.youtube.com/embed/npF9rPdU_VA?autoplay=1" }
+            // Dodaj więcej nut i linków do YouTube tutaj
+        ];
+        let currentNote = null;
+        let attempts = 0;
+        let wins = 0;
+        function drawNote() {
+            const randomIndex = Math.floor(Math.random() * notes.length);
+            currentNote = notes[randomIndex];
+            document.getElementById("youtube-iframe").src = currentNote.link;
+            document.getElementById("note-link").classList.remove("hidden");
+            document.getElementById("youtube-container").classList.remove("hidden");
+            document.getElementById("result").classList.add("hidden");
+            document.getElementById("next-note").classList.add("hidden");
+            document.getElementById("retry").classList.add("hidden");
+            document.getElementById("replay-sound").classList.remove("hidden");
+            document.getElementById("user-guess").value = '';
+        }
+
+        function checkGuess() {
+            const userGuess = document.getElementById("user-guess").value.trim().toUpperCase();
+            if (userGuess === "") {
+                alert("Proszę wpisać odpowiedź przed zatwierdzeniem.");
+                return;
+            }
+            attempts++;
+            if (userGuess === currentNote.note) {
+                wins++;
+                document.getElementById("result").textContent = "Gratulacje! Zgadłeś!";
+                document.getElementById("next-note").classList.remove("hidden");
+            } else {
+                document.getElementById("result").textContent = "Niestety, to nie ta nuta. Spróbuj ponownie lub przejdź do następnej nuty.";
+                document.getElementById("retry").classList.remove("hidden");
+                document.getElementById("next-note").classList.remove("hidden");
+            }
+            document.getElementById("result").classList.remove("hidden");
+            updateScore();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkGuess();
+            }
+        }
+
+        function retryGuess() {
+            document.getElementById("result").classList.add("hidden");
+            document.getElementById("retry").classList.add("hidden");
+            document.getElementById("user-guess").value = '';
+        }
+        function replaySound() {
+            document.getElementById("youtube-iframe").src = currentNote.link;
+        }
+        function updateScore() {
+            document.getElementById("score").textContent = `Próby: ${attempts}, Wygrane: ${wins}`;
+        }
+    </script>
+
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "https://martagriner.github.io/twojglos/G%C5%82%C3%B3wny/Gra_1.html"; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "Główny/Gra_1.html"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      (function () {
+        // DON'T EDIT BELOW THIS LINE
+        var d = document,
+          s = d.createElement("script");
+        s.src = "https://twojglos.disqus.com/embed.js";
+        s.setAttribute("data-timestamp", +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+        // **Dodana funkcjonalność zatwierdzania klawiszem Enter**
+        document.getElementById("user-guess").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                // Sprawdzenie, czy pole tekstowe nie jest puste
+                if (document.getElementById("user-guess").value.trim() !== "") {
+                    checkGuess();
+                } else {
+                    alert("Proszę wpisać odpowiedź przed zatwierdzeniem.");
+                }
+            }
+        });
+    </script>
+    <noscript
+      >Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript"
+        >comments powered by Disqus.</a
+      ></noscript
+    >
+</body>
+</html>
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+    this.page.url = "https://martagriner.github.io/twojglos/G%C5%82%C3%B3wny/Gra_1.html"; // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = "Główny/Gra_1.html"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  (function () {
+    // DON'T EDIT BELOW THIS LINE
+    var d = document,
+      s = d.createElement("script");
+    s.src = "https://twojglos.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+<div class="container">
+    <h1>Nauka Dźwięków</h1>
+    <p>Kliknij na przycisk, aby odsłuchać dźwięk i nauczyć się go rozpoznawać.</p>
+    <button onclick="playNote()">Odtwórz dźwięk</button>
+    <div id="note-link" class="hidden">
+        <div id="youtube-container" class="hidden">
+            <iframe id="youtube-iframe" width="0" height="0" frameborder="0" allow="autoplay"></iframe>
+        </div>
+        <div id="note-name" class="hidden">
+            <h2 id="note-text"></h2>
+        </div>
+        <button onclick="revealNote()">Pokaż nazwę dźwięku</button>
+    </div>
+    <button id="next-note" class="hidden" onclick="playNote()">Następny Dźwięk</button>
+</div>
+
+<script>
+    const notes = [
+        { note: "C", link: "https://www.youtube.com/embed/FtqgqYRDTDg?autoplay=1" },
+        { note: "D", link: "https://www.youtube.com/embed/3o_GX-e92mY?autoplay=1" },
+        { note: "E", link: "https://www.youtube.com/embed/h0qBW6V5v3c?autoplay=1" },
+        { note: "A", link: "https://www.youtube.com/embed/h0qBW6V5v3c?autoplay=1" },
+        { note: "H", link: "https://www.youtube.com/embed/AW2FFA0OAGw?autoplay=1" },
+        { note: "G", link: "https://www.youtube.com/embed/GSynCGIGUDY?autoplay=1" },
+        { note: "F", link: "https://www.youtube.com/embed/npF9rPdU_VA?autoplay=1" }
+        // Dodaj więcej nut i linków do YouTube tutaj
+    ];
+
+    let currentNote = null;
+
+    function playNote() {
+        const randomIndex = Math.floor(Math.random() * notes.length);
+        currentNote = notes[randomIndex];
+        document.getElementById("youtube-iframe").src = currentNote.link;
+        document.getElementById("note-link").classList.remove("hidden");
+        document.getElementById("youtube-container").classList.remove("hidden");
+        document.getElementById("note-name").classList.add("hidden");
+        document.getElementById("note-text").textContent = currentNote.note;
+    }
+
+    function revealNote() {
+        document.getElementById("note-name").classList.remove("hidden");
+        document.getElementById("next-note").classList.remove("hidden");
+    }
+</script>
+</body>
+</html>
