@@ -85,7 +85,7 @@
             <div id="youtube-container" class="hidden">
                 <iframe id="youtube-iframe" width="0" height="0" frameborder="0" allow="autoplay"></iframe>
             </div>
-            <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)">
+            <input type="text" id="user-guess" placeholder="Twoja odpowiedź (np. C, D, E)" onkeypress="handleKeyPress(event)">
             <button onclick="checkGuess()">Sprawdź</button>
         </div>
         <div id="result" class="result hidden"></div>
@@ -140,6 +140,13 @@
             updateScore();
         }
 
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkGuess();
+            }
+        }
+
         function retryGuess() {
             document.getElementById("result").classList.add("hidden");
             document.getElementById("retry").classList.add("hidden");
@@ -154,27 +161,27 @@
             document.getElementById("score").textContent = `Próby: ${attempts}, Wygrane: ${wins}`;
         }
     </script>
+
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "https://martagriner.github.io/twojglos/G%C5%82%C3%B3wny/Gra_1.html"; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "Główny/Gra_1.html"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      (function () {
+        // DON'T EDIT BELOW THIS LINE
+        var d = document,
+          s = d.createElement("script");
+        s.src = "https://twojglos.disqus.com/embed.js";
+        s.setAttribute("data-timestamp", +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript
+      >Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript"
+        >comments powered by Disqus.</a
+      ></noscript
+    >
 </body>
 </html>
-
-<div id="disqus_thread"></div>
-<script>
-  var disqus_config = function () {
-    this.page.url = "https://martagriner.github.io/twojglos/G%C5%82%C3%B3wny/Gra_1.html"; // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = "Główny/Gra_1.html"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-  (function () {
-    // DON'T EDIT BELOW THIS LINE
-    var d = document,
-      s = d.createElement("script");
-    s.src = "https://twojglos.disqus.com/embed.js";
-    s.setAttribute("data-timestamp", +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-</script>
-<noscript
-  >Please enable JavaScript to view the
-  <a href="https://disqus.com/?ref_noscript"
-    >comments powered by Disqus.</a
-  ></noscript
->
