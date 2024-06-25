@@ -62,6 +62,16 @@
             display: block;
             padding: 14px 16px;
         }
+        .stats {
+            margin-top: 20px;
+        }
+        .hidden {
+            background-color: #006994;
+            color: #006994;
+        }
+        .matched {
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
@@ -76,8 +86,16 @@
     </nav>
     <div class="game-container">
         <h1>Gra Memory: </h1>
-        <div id="game-board">
-           
+        <button id="new-game-button">Nowa gra</button>
+        <div class="stats">
+            <p>Czas: <span id="time">0</span> sekund</p>
+            <p>Błędy: <span id="errors">0</span></p>
+        </div>
+        <div id="game-board"></div>
+        <div id="congrats" style="display:none;">
+            <h2>Gratulacje! Ukończyłeś grę.</h2>
+            <p>Łączna liczba błędów: <span id="total-errors"></span></p>
+            <button id="retry-button">Spróbuj ponownie</button>
         </div>
     </div>
 
@@ -100,8 +118,17 @@
 
             let firstCard = null;
             let secondCard = null;
+            let errors = 0;
+            let startTime;
+            let timerInterval;
 
             const gameBoard = document.getElementById('game-board');
+            const newGameButton = document.getElementById('new-game-button');
+            const retryButton = document.getElementById('retry-button');
+            const timeDisplay = document.getElementById('time');
+            const errorsDisplay = document.getElementById('errors');
+            const congratsDisplay = document.getElementById('congrats');
+            const totalErrorsDisplay = document.getElementById('total-errors');
 
             function shuffle(array) {
                 for (let i = array.length - 1; i > 0; i--) {
@@ -136,7 +163,10 @@
                         secondCard.classList.add('matched');
                         firstCard = null;
                         secondCard = null;
+                        checkGameEnd();
                     } else {
+                        errors++;
+                        errorsDisplay.innerText = errors;
                         setTimeout(() => {
                             firstCard.classList.add('hidden');
                             secondCard.classList.add('hidden');
@@ -147,15 +177,44 @@
                 }
             }
 
-            function initGame() {
+            function checkGameEnd() {
+                const matchedCards = document.querySelectorAll('.card.matched');
+                if (matchedCards.length === cardsData.length) {
+                    clearInterval(timerInterval);
+                    congratsDisplay.style.display = 'block';
+                    totalErrorsDisplay.innerText = errors;
+                }
+            }
+
+            function startTimer() {
+                startTime = Date.now();
+                timerInterval = setInterval(() => {
+                    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                    timeDisplay.innerText = elapsedTime;
+                }, 1000);
+            }
+
+            function resetGame() {
+                gameBoard.innerHTML = '';
+                errors = 0;
+                firstCard = null;
+                secondCard = null;
+                errorsDisplay.innerText = errors;
+                timeDisplay.innerText = '0';
+                congratsDisplay.style.display = 'none';
+                clearInterval(timerInterval);
                 shuffle(cardsData);
                 cardsData.forEach(cardData => {
                     const card = createCard(cardData);
                     gameBoard.appendChild(card);
                 });
+                startTimer();
             }
 
-            initGame();
+            newGameButton.addEventListener('click', resetGame);
+            retryButton.addEventListener('click', resetGame);
+
+            resetGame();
         });
     </script>
 </body>
