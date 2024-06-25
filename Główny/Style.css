@@ -59,4 +59,13 @@ body {
         .menu a:hover {
             background-color: #ddd;
             color: black;
+ .stats {
+    margin-top: 20px;
+}
+
+#congrats {
+    display: none;
+    margin-top: 20px;
+}
+
         }
