@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game - Twój Głos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            color: black;
+        }
+        .game-container {
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+        .card {
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+            display: inline-block;
+            background-color: #008CBA;
+            color: white;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .hidden {
+            background-color: #006994;
+            color: #006994;
+        }
+        .matched {
+            visibility: hidden;
+        }
+        .menu {
+            background-color: #333;
+            overflow: hidden;
+        }
+        .menu a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .dropdown a {
+            display: block;
+            padding: 14px 16px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu">
+        <div class="dropdown">
+            <a href="/twojglos/index.html">Główna</a>
+            <a href="/twojglos/Główny/Ćwiczenie.html">Ćwiczenia</a>
+            <a href="/twojglos/Główny/Gra_1.html">Gra</a>
+            <a href="/twojglos/Główny/Nauka Dzwiekow.html">Nauka Dźwięków</a>
+            <a href="/twojglos/Główny/MEMORY.html">Memory</a>
+        </div>
+    </nav>
+    <div class="game-container">
+        <h1>Gra Memory: </h1>
+        <div id="game-board">
+           
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const cardsData = [
+                { id: 1, text: '1' },
+                { id: 1, text: '1' },
+                { id: 2, text: '2' },
+                { id: 2, text: '2' },
+                { id: 3, text: '3' },
+                { id: 3, text: '3' },
+                { id: 4, text: '4' },
+                { id: 4, text: '4' },
+                { id: 5, text: '5' },
+                { id: 5, text: '5' },
+                { id: 6, text: '6' },
+                { id: 6, text: '6' }
+            ];
+
+            let firstCard = null;
+            let secondCard = null;
+
+            const gameBoard = document.getElementById('game-board');
+
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            function createCard(cardData) {
+                const card = document.createElement('div');
+                card.classList.add('card', 'hidden');
+                card.dataset.id = cardData.id;
+                card.innerText = cardData.text;
+                card.addEventListener('click', onCardClicked);
+                return card;
+            }
+
+            function onCardClicked(event) {
+                const clickedCard = event.target;
+
+                if (clickedCard === firstCard || clickedCard.classList.contains('matched')) {
+                    return;
+                }
+
+                clickedCard.classList.remove('hidden');
+                if (!firstCard) {
+                    firstCard = clickedCard;
+                } else {
+                    secondCard = clickedCard;
+                    if (firstCard.dataset.id === secondCard.dataset.id) {
+                        firstCard.classList.add('matched');
+                        secondCard.classList.add('matched');
+                        firstCard = null;
+                        secondCard = null;
+                    } else {
+                        setTimeout(() => {
+                            firstCard.classList.add('hidden');
+                            secondCard.classList.add('hidden');
+                            firstCard = null;
+                            secondCard = null;
+                        }, 1000);
+                    }
+                }
+            }
+
+            function initGame() {
+                shuffle(cardsData);
+                cardsData.forEach(cardData => {
+                    const card = createCard(cardData);
+                    gameBoard.appendChild(card);
+                });
+            }
+
+            initGame();
+        });
+    </script>
+</body>
+</html>
+
