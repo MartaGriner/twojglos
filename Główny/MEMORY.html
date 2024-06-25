@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Game - Twój Głos</title>
+    <title>Memory</title>
+    <link
+      href="/twojglos/Obrazki/Obraz_1__głos-główna-ikona_.ico"
+      rel="shortcut icon"
+      type="image/vnd.microsoft.ico"
+    />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,12 +70,9 @@
         .stats {
             margin-top: 20px;
         }
-        .hidden {
-            background-color: #006994;
-            color: #006994;
-        }
-        .matched {
-            visibility: hidden;
+        #congrats {
+            display: none;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -92,7 +94,7 @@
             <p>Błędy: <span id="errors">0</span></p>
         </div>
         <div id="game-board"></div>
-        <div id="congrats" style="display:none;">
+        <div id="congrats">
             <h2>Gratulacje! Ukończyłeś grę.</h2>
             <p>Łączna liczba błędów: <span id="total-errors"></span></p>
             <button id="retry-button">Spróbuj ponownie</button>
@@ -213,8 +215,6 @@
 
             newGameButton.addEventListener('click', resetGame);
             retryButton.addEventListener('click', resetGame);
-
-            resetGame();
         });
     </script>
 </body>
